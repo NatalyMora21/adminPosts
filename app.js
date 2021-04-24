@@ -24,7 +24,7 @@ app.listen(PORT, () => {
 
     //Sync, crear las tablas 
     //Force true: DROP TABLES
-    sequelize.sync({force:true}).then(()=>{
+    sequelize.sync({force:false}).then(()=>{
         console.log('Nos hemos conectado a la base de datos')
     }).catch(err=>{
         console.log('Se a producido un error', err);

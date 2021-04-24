@@ -24,7 +24,7 @@ Post.init({
         allowNull:false,
         validate:{
             notNull:{
-                msg: "The context of the post must not be empty"
+                msg: "The body of the post must not be empty"
             },
         }
     } ,

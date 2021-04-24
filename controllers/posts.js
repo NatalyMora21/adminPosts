@@ -6,7 +6,8 @@ require('../database/asociations');
 const allposts = async (req, res) => {
   try {
     const allPosts = await Post.findAll({
-      attributes: ["id", "title", "image","categoryIdentifier"],
+      order: [['createdAt', 'DESC']] ,  
+      attributes: ["id", "title", "image","categoryIdentifier","createdAt"],
     });
     res.status(202).json(allPosts);
   } catch (e) {
@@ -20,6 +21,7 @@ const oneposts = async (req, res) => {
 
   try {
     const onePosts = await Post.findAll({
+      attributes: ["id", "title","body", "image","categoryIdentifier"],
       where: {
         id: idPosts,
       },
@@ -36,19 +38,19 @@ const oneposts = async (req, res) => {
 
 //Function CREATE posts
 const createposts = async (req, res) => {
-  const { title, body, image, category } = req.body;
+  const { title, body, image, categoryIdentifier } = req.body;
   try {
     const newPosts = await Post.create({
       title,
       body,
       image,
-      category,
+      categoryIdentifier
     });
     res
       .status(201)
       .json({ message: "A new post has been created successfully", newPosts });
   } catch (e) {
-    res.status(500).json(e);
+    res.json(e);
   }
 };
 
